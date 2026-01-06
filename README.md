@@ -21,17 +21,28 @@
 - `7z` - 7-Zip压缩格式
 
 ## 安装
+### 方法一：使用 go install（推荐）
+
+下载最新的release包 
+- https://github.com/panyingyun/gz/releases
+
+### 方法二：使用 go install（推荐）
+
+如果你已经安装了 Go 1.16 或更高版本，可以直接使用 `go install` 命令安装：
 
 ```bash
+go install github.com/panyingyun/gz@latest
+```
+
+安装完成后，确保 `$GOPATH/bin` 或 `$HOME/go/bin` 在你的 `PATH` 环境变量中，然后就可以直接使用 `gz` 命令了。
+
+### 方法三：使用 go install（不推荐，需要自己有编译环境）
+```bash
 # 克隆仓库
-git clone <repository-url>
+git clone https://github.com/panyingyun/gz.git
 cd gz
-
 # 构建
-go build -o gz.exe
-
-# 或者直接运行
-go run .
+make build
 ```
 
 ## 使用方法

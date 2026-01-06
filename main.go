@@ -5,6 +5,13 @@ import (
 	"os"
 )
 
+// 这些变量将在编译时通过 -ldflags 注入
+var (
+	Version   = "v0.0.0"
+	GitCommit = "unknown"
+	BuildTime = "unknown"
+)
+
 func main() {
 	if len(os.Args) < 2 {
 		printUsage()
@@ -45,7 +52,11 @@ func main() {
 
 		prefix := getArchiveNamePrefix(archivePath)
 		fmt.Printf("成功解压到: %s\n", prefix)
-
+	case "version":
+		fmt.Println("Version: ", Version)
+		fmt.Println("BuildTime: ", BuildTime)
+		fmt.Println("GitCommit: ", GitCommit)
+		os.Exit(0)
 	default:
 		fmt.Fprintf(os.Stderr, "错误: 未知命令 '%s'\n", command)
 		printUsage()
@@ -55,6 +66,7 @@ func main() {
 
 func printUsage() {
 	fmt.Fprintf(os.Stderr, "用法:\n")
+	fmt.Fprintf(os.Stderr, "  gz version                    显示版本信息\n")
 	fmt.Fprintf(os.Stderr, "  gz zip <输出文件> <源目录>    压缩文件或目录\n")
 	fmt.Fprintf(os.Stderr, "  gz unzip <压缩包>             解压文件\n")
 	fmt.Fprintf(os.Stderr, "\n")
@@ -62,6 +74,7 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  zip, tar, tar.gz, tar.bz2, tar.xz, gz, bz2, 7z\n")
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "示例:\n")
+	fmt.Fprintf(os.Stderr, "  gz version \n")
 	fmt.Fprintf(os.Stderr, "  gz zip images.zip folder/\n")
 	fmt.Fprintf(os.Stderr, "  gz zip source.tar.gz folder/\n")
 	fmt.Fprintf(os.Stderr, "  gz unzip archive.zip\n")
