@@ -26,7 +26,7 @@ func extractArchive(archivePath string) error {
 	extractDir := prefix
 
 	// 创建解压目录
-	if err := os.MkdirAll(extractDir, 0755); err != nil {
+	if err := os.MkdirAll(extractDir, 0o755); err != nil {
 		return fmt.Errorf("创建解压目录失败: %v", err)
 	}
 
@@ -77,7 +77,7 @@ func extractZip(archivePath, extractDir string) error {
 			continue
 		}
 
-		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+		if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 			return err
 		}
 
@@ -131,7 +131,7 @@ func extractTar(archivePath, extractDir string) error {
 				return err
 			}
 		case tar.TypeReg:
-			if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 				return err
 			}
 
@@ -184,7 +184,7 @@ func extractTarGz(archivePath, extractDir string) error {
 				return err
 			}
 		case tar.TypeReg:
-			if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 				return err
 			}
 
@@ -232,7 +232,7 @@ func extractTarBz2(archivePath, extractDir string) error {
 				return err
 			}
 		case tar.TypeReg:
-			if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 				return err
 			}
 
@@ -358,7 +358,6 @@ func handleScatteredFiles(extractDir string) error {
 		allItems = append(allItems, relPath)
 		return nil
 	})
-
 	if err != nil {
 		return err
 	}
@@ -389,7 +388,7 @@ func handleScatteredFiles(extractDir string) error {
 	// 如果是散乱文件，创建包装目录
 	if isScattered {
 		wrapperDir := filepath.Join(extractDir, "extracted")
-		if err := os.MkdirAll(wrapperDir, 0755); err != nil {
+		if err := os.MkdirAll(wrapperDir, 0o755); err != nil {
 			return err
 		}
 
@@ -404,7 +403,7 @@ func handleScatteredFiles(extractDir string) error {
 				continue
 			}
 
-			if err := os.MkdirAll(filepath.Dir(newPath), 0755); err != nil {
+			if err := os.MkdirAll(filepath.Dir(newPath), 0o755); err != nil {
 				return err
 			}
 

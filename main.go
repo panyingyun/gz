@@ -67,4 +67,3 @@ func printUsage() {
 	fmt.Fprintf(os.Stderr, "  gz unzip archive.zip\n")
 	fmt.Fprintf(os.Stderr, "  gz unzip archive.tar.xz\n")
 }
-
